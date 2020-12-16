@@ -1,9 +1,10 @@
 import * as Location from 'expo-location';
 
-const getCurrentPosition = async () => {
-      return await Location.getCurrentPositionAsync({accuracy:Location.Accuracy.High})
-      .then( e => e.coords)
-      .catch( e => alert('Błąd przy lokalizacji'))
+const getCurrentPosition =  () => {
+    Location.requestPermissionsAsync().then(location => {
+      return Location.getCurrentPositionAsync({accuracy:Location.Accuracy.High})
+        .then( e => e.coords)
+    }).catch( e => alert('error'))
 }
 
 const getRandomLocationNearby = (x0, y0, radius) => {
