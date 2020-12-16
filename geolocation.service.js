@@ -11,21 +11,22 @@ const getRandomLocationNearby = (x0, y0, radius) => {
    let markers = [];
 
    for( let i = 0; i < 10; i++) {
-       var r = 100/111300 // = 100 meters
-       , y0 = original_lat
-       , x0 = original_lng
-       , u = Math.random()
-       , v = Math.random()
-       , w = r * Math.sqrt(u)
-       , t = 2 * Math.PI * v
-       , x = w * Math.cos(t)
-       , y1 = w * Math.sin(t)
-       , x1 = x / Math.cos(y0)
+    // Convert radius from meters to degrees
+    let radiusInDegrees = radius / 111000;
 
-        newY = y0 + y1
-        newX = x0 + x1
-       console.log(newY,newX);
-       markers.push({ latitude: newY, longitude: newX })
+    let u = random.nextDouble();
+    let v = random.nextDouble();
+    let w = radiusInDegrees * Math.sqrt(u);
+    let t = 2 * Math.PI * v;
+    let x = w * Math.cos(t);
+    let y = w * Math.sin(t);
+
+    // Adjust the x-coordinate for the shrinking of the east-west distances
+    let new_x = x / Math.cos(Math.toRadians(y0));
+
+    let foundLongitude = new_x + x0;
+    let foundLatitude = y + y0;
+     markers.push({longitude:  foundLongitude, latitude: foundLatitude });
     }
     return markers;
 }
