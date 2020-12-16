@@ -16,14 +16,13 @@ export default function App() {
    useEffect(() => {
      getCurrentPosition()
      .then(coords => {
-       alert(coords.latitude)
       setLocation({
         latitude: coords.latitude,
         longitude: coords.longitude,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
       })
-      setMarkers( getRandomLocationNearby(coords.longitude, coords.longitude, 1))
+      setMarkers(getRandomLocationNearby(coords.longitude, coords.latitude, 1000))
     })
   }, [location.latitude, location.longitude]);
 
@@ -35,7 +34,7 @@ export default function App() {
     {markers.map((marker, index) => (
     <Marker
       key={index}
-      coordinate={{latitude: location.latitude, longitude: location.longitude}}
+      coordinate={{latitude: marker.latitude, longitude: marker.longitude}}
       title="marker"
       description="opis"/>
      ))} 

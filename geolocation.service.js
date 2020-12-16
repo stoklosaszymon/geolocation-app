@@ -1,11 +1,11 @@
 import * as Location from 'expo-location';
 
-const getCurrentPosition =  () => {
-    Location.requestPermissionsAsync().then(location => {
-      return Location.getCurrentPositionAsync({accuracy:Location.Accuracy.High})
-        .then( e => e.coords)
-        .catch(e => "Blad przy gejolokacji")
-    }).catch( e => alert('Brak uprawnień'))
+const getCurrentPosition =  async () => {
+    await Location.requestPermissionsAsync()
+
+    const { coords } = await Location.getCurrentPositionAsync({accuracy:Location.Accuracy.High})
+
+    return coords
 }
 
 const getRandomLocationNearby = (x0, y0, radius) => {
@@ -16,7 +16,7 @@ const getRandomLocationNearby = (x0, y0, radius) => {
     // Convert radius from meters to degrees
     let radiusInDegrees = radius / 111000;
 
-    let u = Math.random();
+    let u = Math.random()
     let v = Math.random();
     let w = radiusInDegrees * Math.sqrt(u);
     let t = 2 * Math.PI * v;
