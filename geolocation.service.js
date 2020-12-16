@@ -22,7 +22,7 @@ const getRandomLocationNearby = (x0, y0, radius) => {
     let y = w * Math.sin(t);
 
     // Adjust the x-coordinate for the shrinking of the east-west distances
-    let new_x = x / Math.cos(Math.toRadians(y0));
+    let new_x = x / Math.cos(y0 * (Math.PI/180));
 
     let foundLongitude = new_x + x0;
     let foundLatitude = y + y0;
