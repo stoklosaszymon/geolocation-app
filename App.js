@@ -38,6 +38,10 @@ export default function App() {
       title="marker"
       description="opis"/>
      ))} 
+     <Marker
+       coordinate={{ latitude : location.latitude , longitude : location.longitude }}
+       image={require('./you.png')}
+     />
     </MapView>
     </View>
   );
